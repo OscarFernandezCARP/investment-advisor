@@ -35,3 +35,6 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ success: false, error: e.message });
   }
 });
+
+const chatRouter = require('./routes/chat');
+app.use('/api/chat', chatRouter);
