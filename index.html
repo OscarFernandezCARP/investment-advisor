@@ -313,11 +313,10 @@ async function sendChat(){
   box.appendChild(thinking);box.scrollTop=box.scrollHeight;
   const a=document.getElementById('sl-aporte').value;
   const y=document.getElementById('sl-years').value;
-  const prompt=`Sos un asesor financiero experto en Argentina. Responde en espanol, claro y conciso. Sin asteriscos. Maximo 120 palabras.\n\nPerfil: aporte USD ${a}/mes, horizonte ${y} anos, perfil moderado. Cartera: SPY 20%, XLP 15%, XLV 10%, XLF 10%, NU 5%, TZX28 15%, AL30 10%, YPF 8%, GGAL 7%.\n\nPregunta: ${q}`;
-  try{
+    try{
     const res=await fetch(BACKEND+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,aporte:a,years:y})});const data=await res.json();thinking.textContent=data.reply||'Sin respuesta';
     const data=await res.json();
-    thinking.textContent=data.reply||'No pude procesar la respuesta.';
+    thinking.textContent=data.reply|'No pude procesar la respuesta.';
   }catch(e){
     thinking.textContent='Manten el rumbo, diversifica y pensa largo plazo. Para el chat completo conecta tu API key de Claude.';
   }
