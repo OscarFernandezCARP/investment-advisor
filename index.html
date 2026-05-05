@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asesor Financiero IA - Oscar</title>
+<title>Asesor Financiero IA</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -21,15 +21,10 @@ body{font-family:-apple-system,sans-serif;background:#0a0f1e;color:#fff;min-heig
 .card{background:#0d1526;border:1px solid #1e2a3a;border-radius:14px;padding:20px}
 .card-sm{background:#0d1526;border:1px solid #1e2a3a;border-radius:10px;padding:14px}
 .card-title{font-size:12px;color:#64748b;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.card-val{font-size:24px;font-weight:700;color:#fff}
 .view{display:none;flex-direction:column;gap:20px}
 .view.on{display:flex}
 .asset-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:10px;transition:background .15s}
 .asset-row:hover{background:#1e2a3a}
-.a-sym{font-size:14px;font-weight:700;color:#fff;font-family:monospace}
-.a-name{font-size:12px;color:#64748b;margin-top:2px}
-.a-price{font-size:15px;font-weight:600;color:#fff;font-family:monospace}
-.a-right{display:flex;align-items:center;gap:12px}
 .chg{font-size:13px;font-weight:600;padding:3px 10px;border-radius:6px}
 .up{color:#1D9E75;background:rgba(29,158,117,.12)}
 .dn{color:#D85A30;background:rgba(216,90,48,.12)}
@@ -79,7 +74,7 @@ input[type=range]{width:100%;accent-color:#3b82f6}
 </head>
 <body>
 <div class="topbar">
-  <div class="logo"><div class="pulse"></div>Asesor Financiero IA <span style="font-size:12px;color:#475569;font-weight:400;margin-left:4px">· Jubilación a 20 años</span></div>
+  <div class="logo"><div class="pulse"></div>Asesor Financiero IA <span style="font-size:12px;color:#475569;font-weight:400;margin-left:4px">· Jubilacion a 20 anos</span></div>
   <div class="nav">
     <button class="on" onclick="show('sim',this)">Simulador</button>
     <button onclick="show('cartera',this)">Cartera</button>
@@ -94,10 +89,10 @@ input[type=range]{width:100%;accent-color:#3b82f6}
 <div class="view on" id="v-sim">
   <div class="grid2">
     <div class="card">
-      <div style="font-size:16px;font-weight:700;margin-bottom:20px">Tu perfil de inversión</div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:20px">Tu perfil de inversion</div>
       <div class="sl-row"><div class="sl-label"><span>Aporte mensual</span><span class="sl-val" id="lv-aporte">USD 500</span></div><input type="range" min="50" max="3000" step="50" value="500" id="sl-aporte" oninput="recalc()"></div>
       <div class="sl-row"><div class="sl-label"><span>Capital inicial</span><span class="sl-val" id="lv-inicial">USD 10.000</span></div><input type="range" min="0" max="100000" step="1000" value="10000" id="sl-inicial" oninput="recalc()"></div>
-      <div class="sl-row"><div class="sl-label"><span>Horizonte</span><span class="sl-val" id="lv-years">20 años</span></div><input type="range" min="5" max="35" step="1" value="20" id="sl-years" oninput="recalc()"></div>
+      <div class="sl-row"><div class="sl-label"><span>Horizonte</span><span class="sl-val" id="lv-years">20 anos</span></div><input type="range" min="5" max="35" step="1" value="20" id="sl-years" oninput="recalc()"></div>
       <div class="sl-row"><div class="sl-label"><span>Rendimiento anual</span><span class="sl-val" id="lv-rate">8%</span></div><input type="range" min="4" max="15" step="0.5" value="8" id="sl-rate" oninput="recalc()"></div>
       <div style="border-top:1px solid #1e2a3a;padding-top:16px;margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div class="card-sm"><div class="card-title">Capital final</div><div style="font-size:22px;font-weight:700;color:#1D9E75" id="st-final">--</div></div>
@@ -107,9 +102,9 @@ input[type=range]{width:100%;accent-color:#3b82f6}
       </div>
     </div>
     <div class="card">
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px">Proyección de capital</div>
-      <div style="font-size:12px;color:#475569;margin-bottom:16px">Tu cartera vs solo dólar vs plazo fijo</div>
-      <div style="position:relative;height:280px"><canvas id="projChart" role="img" aria-label="Proyeccion capital">Grafico proyeccion.</canvas></div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:4px">Proyeccion de capital</div>
+      <div style="font-size:12px;color:#475569;margin-bottom:16px">Tu cartera vs solo dolar vs plazo fijo</div>
+      <div style="position:relative;height:280px"><canvas id="projChart" role="img" aria-label="Proyeccion">Grafico.</canvas></div>
       <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:#64748b">
         <span><span style="display:inline-block;width:10px;height:3px;background:#1D9E75;border-radius:2px;margin-right:4px;vertical-align:middle"></span>Tu cartera</span>
         <span><span style="display:inline-block;width:10px;height:3px;background:#BA7517;border-radius:2px;margin-right:4px;vertical-align:middle"></span>Solo dolar 2%</span>
@@ -120,11 +115,11 @@ input[type=range]{width:100%;accent-color:#3b82f6}
 </div>
 
 <div class="view" id="v-cartera">
-  <div class="grid4" id="metrics-grid">
-    <div class="card-sm"><div class="card-title">En verde hoy</div><div class="card-val" id="m-up" style="color:#1D9E75">--</div></div>
-    <div class="card-sm"><div class="card-title">Mejor activo</div><div class="card-val" id="m-best" style="font-size:16px">--</div></div>
-    <div class="card-sm"><div class="card-title">Peor activo</div><div class="card-val" id="m-worst" style="font-size:16px">--</div></div>
-    <div class="card-sm"><div class="card-title">Senales compra</div><div class="card-val" id="m-buys" style="color:#1D9E75">--</div></div>
+  <div class="grid4">
+    <div class="card-sm"><div class="card-title">En verde hoy</div><div style="font-size:24px;font-weight:700;color:#1D9E75" id="m-up">--</div></div>
+    <div class="card-sm"><div class="card-title">Mejor activo</div><div style="font-size:16px;font-weight:700" id="m-best">--</div></div>
+    <div class="card-sm"><div class="card-title">Peor activo</div><div style="font-size:16px;font-weight:700" id="m-worst">--</div></div>
+    <div class="card-sm"><div class="card-title">Senales compra</div><div style="font-size:24px;font-weight:700;color:#1D9E75" id="m-buys">--</div></div>
   </div>
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -161,175 +156,154 @@ input[type=range]{width:100%;accent-color:#3b82f6}
       <button class="btn-sm" onclick="setQ('Analiza mi cartera completa')">Analisis completo</button>
     </div>
     <div class="chat-input-row">
-      <input class="chat-input" id="chat-q" placeholder="Pregunta sobre tu inversion, el mercado, estrategias..." onkeydown="if(event.key==='Enter')sendChat()">
+      <input class="chat-input" id="chat-q" placeholder="Pregunta sobre tu inversion..." onkeydown="if(event.key==='Enter')sendChat()">
       <button class="btn" id="chat-btn" onclick="sendChat()">Enviar</button>
     </div>
   </div>
 </div>
 
 <div class="view" id="v-plan">
-  <div class="grid2">
-    <div class="card">
-      <div style="font-size:16px;font-weight:700;margin-bottom:16px">Tu hoja de ruta</div>
-      <div class="plan-step"><div class="step-num">1</div><div><div class="step-title">Empezar ahora</div><div class="step-desc">Cada mes que esperas cuesta mas que cualquier comision. El tiempo es tu mayor ventaja.</div><span class="tag t-now">Hacer ahora</span></div></div>
-      <div class="plan-step"><div class="step-num">2</div><div><div class="step-title">Mantener distribucion 60/25/15</div><div class="step-desc">ETFs internacionales + bonos + acciones locales. Calibrada para tu perfil moderado.</div><span class="tag t-now">En curso</span></div></div>
-      <div class="plan-step"><div class="step-num">3</div><div><div class="step-title">Rebalancear cada 6 meses</div><div class="step-desc">Si un activo se aleja de su porcentaje objetivo, vende un poco y compra los que quedaron atras.</div><span class="tag t-soon">Ano 1 en adelante</span></div></div>
-      <div class="plan-step"><div class="step-num">4</div><div><div class="step-title">Aumentar aportes</div><div class="step-desc">Pasar de USD 500 a USD 750/mes antes del ano 10 puede aumentar tu capital final en mas de 40%.</div><span class="tag t-soon">Progresivo</span></div></div>
-      <div class="plan-step"><div class="step-num">5</div><div><div class="step-title">Reducir riesgo en ano 15</div><div class="step-desc">Migra hacia mas bonos. Objetivo: 35% ETFs / 50% bonos / 15% locales.</div><span class="tag t-mid">Ano 15</span></div></div>
-      <div class="plan-step"><div class="step-num">6</div><div><div class="step-title">Activar retiro (regla del 4%)</div><div class="step-desc" id="plan-retiro">Retira el 4% anual sin agotar el fondo.</div><span class="tag t-late">Ano 20</span></div></div>
-    </div>
-    <div class="card">
-      <div style="font-size:14px;font-weight:600;margin-bottom:16px">Tu proyeccion personalizada</div>
-      <div style="position:relative;height:260px"><canvas id="planChart" role="img" aria-label="Proyeccion jubilacion">Proyeccion capital.</canvas></div>
-      <div style="background:#1e2a3a;border-radius:10px;padding:14px;margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div><div style="font-size:11px;color:#475569">Capital acumulado</div><div style="font-size:18px;font-weight:700;color:#1D9E75" id="plan-total">--</div></div>
-        <div><div style="font-size:11px;color:#475569">Retiro mensual</div><div style="font-size:18px;font-weight:700;color:#BA7517" id="plan-retiro-val">--</div></div>
-      </div>
-      <div style="font-size:11px;color:#334155;margin-top:12px">Proyeccion referencial. No garantiza resultados futuros.</div>
-    </div>
+  <div class="card">
+    <div style="font-size:16px;font-weight:700;margin-bottom:16px">Tu hoja de ruta</div>
+    <div class="plan-step"><div class="step-num">1</div><div><div class="step-title">Empezar ahora</div><div class="step-desc">Cada mes que esperas cuesta mas que cualquier comision. El tiempo es tu mayor ventaja.</div><span class="tag t-now">Hacer ahora</span></div></div>
+    <div class="plan-step"><div class="step-num">2</div><div><div class="step-title">Mantener distribucion 60/25/15</div><div class="step-desc">ETFs internacionales + bonos + acciones locales. Calibrada para perfil moderado.</div><span class="tag t-now">En curso</span></div></div>
+    <div class="plan-step"><div class="step-num">3</div><div><div class="step-title">Rebalancear cada 6 meses</div><div class="step-desc">Si un activo se aleja de su objetivo, vende un poco y compra los que quedaron atras.</div><span class="tag t-soon">Ano 1 en adelante</span></div></div>
+    <div class="plan-step"><div class="step-num">4</div><div><div class="step-title">Aumentar aportes</div><div class="step-desc">Pasar de USD 500 a USD 750/mes antes del ano 10 puede aumentar el capital final en 40%.</div><span class="tag t-soon">Progresivo</span></div></div>
+    <div class="plan-step"><div class="step-num">5</div><div><div class="step-title">Reducir riesgo en ano 15</div><div class="step-desc">Migra hacia mas bonos. Objetivo: 35% ETFs / 50% bonos / 15% locales.</div><span class="tag t-mid">Ano 15</span></div></div>
+    <div class="plan-step"><div class="step-num">6</div><div><div class="step-title">Activar retiro (regla del 4%)</div><div class="step-desc" id="plan-retiro">Retira el 4% anual sin agotar el fondo.</div><span class="tag t-late">Ano 20</span></div></div>
   </div>
 </div>
 
 </div>
-<div class="footer">Asesor Financiero IA · No constituye asesoramiento financiero certificado · Desarrollado para inversores argentinos</div>
+<div class="footer">Asesor Financiero IA · No constituye asesoramiento financiero certificado · Para inversores argentinos</div>
 
 <script>
-const BACKEND='https://investment-advisor-api-6hsu.onrender.com';
-const NEWS_KEY='ef6605fa9ad64431a43b7dc409982e';
-const SIGNALS={SPY:'COMPRAR',XLP:'MANTENER',XLV:'COMPRAR',XLF:'COMPRAR',NU:'MANTENER','TZX28.BA':'MANTENER','AL30.BA':'MANTENER','YPFD.BA':'COMPRAR','GGAL.BA':'MANTENER'};
-let projC,planC;
+var BACKEND='https://investment-advisor-api-6hsu.onrender.com';
+var NEWS_KEY='ef6605fa9ad64431a43b7dc409982e';
+var SIGNALS={SPY:'COMPRAR',XLP:'MANTENER',XLV:'COMPRAR',XLF:'COMPRAR',NU:'MANTENER','TZX28.BA':'MANTENER','AL30.BA':'MANTENER','YPFD.BA':'COMPRAR','GGAL.BA':'MANTENER'};
+var projC=null;
 
-function fmt(n){if(n>=1000000)return'USD '+Math.round(n/100000)/10+'M';if(n>=1000)return'USD '+Math.round(n/1000)+'k';return'USD '+Math.round(n)}
+function fmt(n){if(n>=1000000)return'USD '+Math.round(n/100000)/10+'M';if(n>=1000)return'USD '+Math.round(n/1000)+'k';return'USD '+Math.round(n);}
 
 function recalc(){
-  const a=+document.getElementById('sl-aporte').value;
-  const y=+document.getElementById('sl-years').value;
-  const ini=+document.getElementById('sl-inicial').value;
-  const r=+document.getElementById('sl-rate').value/100;
+  var a=+document.getElementById('sl-aporte').value;
+  var y=+document.getElementById('sl-years').value;
+  var ini=+document.getElementById('sl-inicial').value;
+  var r=+document.getElementById('sl-rate').value/100;
   document.getElementById('lv-aporte').textContent='USD '+a.toLocaleString('es-AR');
   document.getElementById('lv-years').textContent=y+' anos';
   document.getElementById('lv-inicial').textContent='USD '+ini.toLocaleString('es-AR');
-  document.getElementById('lv-rate').textContent=r*100+'%';
-  const mr=r/12,m=y*12;
-  const fut=mr>0?a*((Math.pow(1+mr,m)-1)/mr):a*m;
-  const total=Math.round(fut+ini*Math.pow(1+r,y));
-  const aportado=Math.round(a*m+ini);
-  const retiro=Math.round(total*0.04/12);
+  document.getElementById('lv-rate').textContent=(r*100)+'%';
+  var mr=r/12,m=y*12;
+  var fut=mr>0?a*((Math.pow(1+mr,m)-1)/mr):a*m;
+  var total=Math.round(fut+ini*Math.pow(1+r,y));
+  var aportado=Math.round(a*m+ini);
+  var retiro=Math.round(total*0.04/12);
   document.getElementById('st-final').textContent=fmt(total);
   document.getElementById('st-aportado').textContent=fmt(aportado);
   document.getElementById('st-ganancia').textContent=fmt(total-aportado);
   document.getElementById('st-retiro').textContent=fmt(retiro)+'/mes';
-  document.getElementById('plan-total').textContent=fmt(total);
-  document.getElementById('plan-retiro-val').textContent=fmt(retiro)+'/mes';
   document.getElementById('plan-retiro').textContent='Con '+fmt(total)+' acumulados, podes retirar '+fmt(retiro)+'/mes sin agotar el fondo.';
-  updateCharts(a,y,ini,r);
+  updateChart(a,y,ini,r);
 }
 
 function buildProj(a,y,ini,r){
-  const mr=r/12,pts=[];
-  for(let i=0;i<=y;i++){const m=i*12;pts.push(Math.round(mr>0?a*((Math.pow(1+mr,m)-1)/mr):a*m)+Math.round(ini*Math.pow(1+r,i)));}
+  var mr=r/12,pts=[],i,m;
+  for(i=0;i<=y;i++){m=i*12;pts.push(Math.round(mr>0?a*((Math.pow(1+mr,m)-1)/mr):a*m)+Math.round(ini*Math.pow(1+r,i)));}
   return pts;
 }
 
-function updateCharts(a,y,ini,r){
-  const labels=Array.from({length:y+1},(_,i)=>i===0?'Hoy':'Ano '+i);
-  const proj=buildProj(a,y,ini,r);
-  const dol=buildProj(a,y,ini,0.02);
-  const pf=buildProj(a,y,ini,0.03);
-  const cfg={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#475569',font:{size:11},maxTicksLimit:8}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#475569',font:{size:11},callback:v=>fmt(v)}}}};
+function updateChart(a,y,ini,r){
+  var labels=[],i;
+  for(i=0;i<=y;i++)labels.push(i===0?'Hoy':'Ano '+i);
+  var proj=buildProj(a,y,ini,r);
+  var dol=buildProj(a,y,ini,0.02);
+  var pf=buildProj(a,y,ini,0.03);
+  var cfg={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#475569',font:{size:11},maxTicksLimit:8}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#475569',font:{size:11},callback:function(v){return fmt(v);}}}}};
   if(projC)projC.destroy();
-  projC=new Chart(document.getElementById('projChart'),{type:'line',data:{labels,datasets:[{data:proj,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.08)',fill:true,tension:.4,pointRadius:0,borderWidth:2},{data:dol,borderColor:'#BA7517',tension:.4,pointRadius:0,borderWidth:1.5,borderDash:[4,3]},{data:pf,borderColor:'#475569',tension:.4,pointRadius:0,borderWidth:1.5,borderDash:[2,3]}]},options:cfg});
-  if(planC)planC.destroy();
-  planC=new Chart(document.getElementById('planChart'),{type:'line',data:{labels,datasets:[{data:proj,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',fill:true,tension:.4,pointRadius:0,borderWidth:2}]},options:cfg});
-}
-
-async function loadPrices(){
-  document.getElementById('asset-list').innerHTML='<div style="text-align:center;padding:30px;color:#475569">Conectando... puede tardar 50 segundos la primera vez.</div>';
-  try{
-    const r=await fetch(BACKEND+'/api/prices');
-    const d=await r.json();
-    if(d.success)renderAssets(d.data);
-    document.getElementById('last-update').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-  }catch(e){
-    document.getElementById('asset-list').innerHTML='<div style="color:#D85A30;padding:20px">Error al conectar. Intentá de nuevo en 30 segundos.</div>';
-  }
-}
-
-function renderAssets(assets){
-  const up=assets.filter(a=>a.changePercent>0).length;
-  const sorted=[...assets].sort((a,b)=>b.changePercent-a.changePercent);
-  document.getElementById('m-up').textContent=up+' / '+assets.length;
-  document.getElementById('m-best').textContent=sorted[0].symbol.replace('.BA','')+' +'+(sorted[0].changePercent.toFixed(2))+'%';
-  document.getElementById('m-worst').textContent=sorted[sorted.length-1].symbol.replace('.BA','')+(sorted[sorted.length-1].changePercent.toFixed(2))+'%';
-  document.getElementById('m-buys').textContent=assets.filter(a=>SIGNALS[a.symbol]==='COMPRAR').length+' senales';
-  document.getElementById('asset-list').innerHTML=assets.map(a=>{
-    const pos=a.changePercent>=0;
-    const sig=SIGNALS[a.symbol]||'MANTENER';
-    const cur=a.currency==='ARS'?'$':'USD ';
-    const price=a.currentPrice?cur+a.currentPrice.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}):'Sin datos';
-    return`<div class="asset-row"><div><div class="a-sym">${a.symbol.replace('.BA','')}</div><div class="a-name">${a.name} · ${a.allocation}%</div></div><div class="a-right"><span class="a-price">${price}</span><span class="chg ${pos?'up':'dn'}">${pos?'+':''}${a.changePercent.toFixed(2)}%</span><span class="sig ${sig==='COMPRAR'?'sig-c':'sig-m'}">${sig}</span></div></div>`;
-  }).join('');
-}
-
-async function loadNews(){
-  document.getElementById('news-list').innerHTML='<div style="text-align:center;padding:30px;color:#475569">Buscando noticias financieras...</div>';
-  try{
-    const q=encodeURIComponent('Argentina inversion bonos mercado');
-    const url=`https://newsapi.org/v2/everything?q=${q}&language=es&sortBy=publishedAt&pageSize=6&apiKey=${NEWS_KEY}`;
-    const r=await fetch(url);
-    const d=await r.json();
-    if(d.articles&&d.articles.length>0){renderNews(d.articles);}
-    else{renderFallbackNews();}
-  }catch(e){renderFallbackNews();}
-}
-
-function renderNews(articles){
-  document.getElementById('news-list').innerHTML=articles.map(a=>{
-    const ago=Math.round((Date.now()-new Date(a.publishedAt))/3600000);
-    return`<div class="news-item"><div class="news-src">${a.source?.name||'Fuente'} · hace ${ago} hs</div><div class="news-title">${a.title}</div><div class="news-sum">${a.description||''}</div><span class="news-tag nt-neu">Mercado financiero</span></div>`;
-  }).join('');
-}
-
-function renderFallbackNews(){
-  document.getElementById('news-list').innerHTML=`
-    <div class="news-item"><div class="news-src">Bloomberg · hace 2 hs</div><div class="news-title">Fed mantiene tasas, mercados al alza</div><div class="news-sum">La Reserva Federal no modifico las tasas, impulsando acciones globales.</div><span class="news-tag nt-pos">Positivo para SPY, XLF</span></div>
-    <div class="news-item"><div class="news-src">Infobae · hace 3 hs</div><div class="news-title">Argentina avanza en acuerdo con el FMI</div><div class="news-sum">El gobierno negocia financiamiento que genera expectativa sobre bonos soberanos.</div><span class="news-tag nt-pos">Positivo para AL30, GGAL</span></div>
-    <div class="news-item"><div class="news-src">El Cronista · hace 4 hs</div><div class="news-title">Inflacion de abril: 4.2%, debajo de lo esperado</div><div class="news-sum">El dato sorprendio positivamente. Los bonos CER ajustan al alza.</div><span class="news-tag nt-pos">Positivo para TZX28</span></div>
-    <div class="news-item"><div class="news-src">Reuters · hace 5 hs</div><div class="news-title">Petroleo cede ante aumento de inventarios</div><div class="news-sum">Los precios del crudo retroceden, generando presion sobre energia.</div><span class="news-tag nt-neg">Atencion con YPF</span></div>`;
-}
-
-function setQ(q){document.getElementById('chat-q').value=q;document.getElementById('chat-q').focus();}
-
-async function sendChat(){
-  const q=document.getElementById('chat-q').value.trim();
-  if(!q)return;
-  const btn=document.getElementById('chat-btn');
-  const box=document.getElementById('chat-box');
-  box.innerHTML+=`<div class="msg msg-usr">${q}</div>`;
-  document.getElementById('chat-q').value='';
-  btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
-  const thinking=document.createElement('div');
-  thinking.className='msg msg-ai';thinking.textContent='Analizando...';
-  box.appendChild(thinking);box.scrollTop=box.scrollHeight;
-  const a=document.getElementById('sl-aporte').value;
-  const y=document.getElementById('sl-years').value;
-    try{
-    const res=await fetch(BACKEND+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,aporte:a,years:y})});const data=await res.json();thinking.textContent=data.reply||'Sin respuesta';
-    thinking.textContent=data.reply|'No pude procesar la respuesta.';
-  }catch(e){
-    thinking.textContent='Manten el rumbo, diversifica y pensa largo plazo. Para el chat completo conecta tu API key de Claude.';
-  }
-  btn.disabled=false;btn.textContent='Enviar';
-  box.scrollTop=box.scrollHeight;
+  projC=new Chart(document.getElementById('projChart'),{type:'line',data:{labels:labels,datasets:[{data:proj,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.08)',fill:true,tension:.4,pointRadius:0,borderWidth:2},{data:dol,borderColor:'#BA7517',tension:.4,pointRadius:0,borderWidth:1.5,borderDash:[4,3]},{data:pf,borderColor:'#475569',tension:.4,pointRadius:0,borderWidth:1.5,borderDash:[2,3]}]},options:cfg});
 }
 
 function show(v,btn){
-  document.querySelectorAll('.view').forEach(el=>el.classList.remove('on'));
-  document.querySelectorAll('.nav button').forEach(el=>el.classList.remove('on'));
+  document.querySelectorAll('.view').forEach(function(el){el.classList.remove('on');});
+  document.querySelectorAll('.nav button').forEach(function(el){el.classList.remove('on');});
   document.getElementById('v-'+v).classList.add('on');
   btn.classList.add('on');
   if(v==='cartera')loadPrices();
   if(v==='noticias')loadNews();
+}
+
+function loadPrices(){
+  document.getElementById('asset-list').innerHTML='<div style="text-align:center;padding:30px;color:#475569">Conectando... puede tardar 50 segundos la primera vez.</div>';
+  fetch(BACKEND+'/api/prices').then(function(r){return r.json();}).then(function(d){
+    if(d.success)renderAssets(d.data);
+    document.getElementById('last-update').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+  }).catch(function(){
+    document.getElementById('asset-list').innerHTML='<div style="color:#D85A30;padding:20px">Error al conectar. Intenta de nuevo en 30 segundos.</div>';
+  });
+}
+
+function renderAssets(assets){
+  var up=0,i,a,sorted,pos,sig,cur,price,html='';
+  for(i=0;i<assets.length;i++){if(assets[i].changePercent>0)up++;}
+  sorted=assets.slice().sort(function(a,b){return b.changePercent-a.changePercent;});
+  document.getElementById('m-up').textContent=up+' / '+assets.length;
+  document.getElementById('m-best').textContent=sorted[0].symbol.replace('.BA','')+' +'+(sorted[0].changePercent.toFixed(2))+'%';
+  document.getElementById('m-worst').textContent=sorted[sorted.length-1].symbol.replace('.BA','')+(sorted[sorted.length-1].changePercent.toFixed(2))+'%';
+  var buys=0;for(i=0;i<assets.length;i++){if(SIGNALS[assets[i].symbol]==='COMPRAR')buys++;}
+  document.getElementById('m-buys').textContent=buys+' senales';
+  for(i=0;i<assets.length;i++){
+    a=assets[i];pos=a.changePercent>=0;sig=SIGNALS[a.symbol]||'MANTENER';
+    cur=a.currency==='ARS'?'$':'USD ';
+    price=a.currentPrice?cur+a.currentPrice.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}):'Sin datos';
+    html+='<div class="asset-row"><div><div style="font-size:14px;font-weight:700;color:#fff;font-family:monospace">'+a.symbol.replace('.BA','')+'</div><div style="font-size:12px;color:#64748b;margin-top:2px">'+a.name+' - '+a.allocation+'%</div></div><div style="display:flex;align-items:center;gap:12px"><span style="font-size:15px;font-weight:600;color:#fff;font-family:monospace">'+price+'</span><span class="chg '+(pos?'up':'dn')+'">'+(pos?'+':'')+a.changePercent.toFixed(2)+'%</span><span class="sig '+(sig==='COMPRAR'?'sig-c':'sig-m')+'">'+sig+'</span></div></div>';
+  }
+  document.getElementById('asset-list').innerHTML=html;
+}
+
+function loadNews(){
+  document.getElementById('news-list').innerHTML='<div style="text-align:center;padding:30px;color:#475569">Buscando noticias...</div>';
+  var q=encodeURIComponent('Argentina inversion bonos mercado');
+  var url='https://newsapi.org/v2/everything?q='+q+'&language=es&sortBy=publishedAt&pageSize=6&apiKey='+NEWS_KEY;
+  fetch(url).then(function(r){return r.json();}).then(function(d){
+    if(d.articles&&d.articles.length>0){
+      var html='',i,a,ago;
+      for(i=0;i<d.articles.length;i++){
+        a=d.articles[i];ago=Math.round((Date.now()-new Date(a.publishedAt))/3600000);
+        html+='<div class="news-item"><div class="news-src">'+(a.source&&a.source.name?a.source.name:'Fuente')+' - hace '+ago+' hs</div><div class="news-title">'+a.title+'</div><div class="news-sum">'+(a.description||'')+'</div><span class="news-tag nt-neu">Mercado financiero</span></div>';
+      }
+      document.getElementById('news-list').innerHTML=html;
+    } else {renderFallbackNews();}
+  }).catch(function(){renderFallbackNews();});
+}
+
+function renderFallbackNews(){
+  document.getElementById('news-list').innerHTML='<div class="news-item"><div class="news-src">Bloomberg</div><div class="news-title">Fed mantiene tasas, mercados al alza</div><div class="news-sum">La Reserva Federal no modifico las tasas, impulsando acciones globales.</div><span class="news-tag nt-pos">Positivo para SPY, XLF</span></div><div class="news-item"><div class="news-src">Infobae</div><div class="news-title">Argentina avanza en acuerdo con el FMI</div><div class="news-sum">Negociaciones generan expectativa sobre bonos soberanos.</div><span class="news-tag nt-pos">Positivo para AL30, GGAL</span></div><div class="news-item"><div class="news-src">El Cronista</div><div class="news-title">Inflacion de abril debajo de lo esperado</div><div class="news-sum">El dato sorprendio positivamente. Los bonos CER ajustan al alza.</div><span class="news-tag nt-pos">Positivo para TZX28</span></div>';
+}
+
+function setQ(q){document.getElementById('chat-q').value=q;document.getElementById('chat-q').focus();}
+
+function sendChat(){
+  var q=document.getElementById('chat-q').value.trim();
+  if(!q)return;
+  var btn=document.getElementById('chat-btn');
+  var box=document.getElementById('chat-box');
+  var a=document.getElementById('sl-aporte').value;
+  var y=document.getElementById('sl-years').value;
+  box.innerHTML+='<div class="msg msg-usr">'+q+'</div>';
+  document.getElementById('chat-q').value='';
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>';
+  var thinking=document.createElement('div');
+  thinking.className='msg msg-ai';
+  thinking.textContent='Analizando...';
+  box.appendChild(thinking);
+  box.scrollTop=box.scrollHeight;
+  fetch(BACKEND+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,aporte:a,years:y})})
+  .then(function(r){return r.json();})
+  .then(function(resp){thinking.textContent=resp.reply||'Sin respuesta.';})
+  .catch(function(){thinking.textContent='Error al conectar. Intenta de nuevo en unos segundos.';})
+  .finally(function(){btn.disabled=false;btn.textContent='Enviar';box.scrollTop=box.scrollHeight;});
 }
 
 recalc();
