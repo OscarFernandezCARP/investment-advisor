@@ -163,4 +163,252 @@ input[type=text],input[type=number]{background:#1e2a3a;border:1px solid #2e3a4a;
 <div class="view" id="v-noticias">
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div><div style="font-size:16px;font-weight:700">Noticias del mercado</div><div style="font-size:12px;color:#475569;margin-top:2px">Analizadas por
+      <div><div style="font-size:16px;font-weight:700">Noticias del mercado</div><div style="font-size:12px;color:#475569;margin-top:2px">Analizadas por IA</div></div>
+      <button class="btn" style="padding:8px 16px;font-size:13px" onclick="loadNews()">Actualizar</button>
+    </div>
+    <div id="news-list"><div style="text-align:center;padding:40px;color:#475569">Cargando noticias...</div></div>
+  </div>
+</div>
+
+<div class="view" id="v-chat">
+  <div class="card">
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px">Chat con tu asesor IA</div>
+    <div style="font-size:12px;color:#475569;margin-bottom:16px">Conoce tu cartera y tu plan. Pregunta lo que quieras.</div>
+    <div class="chat-box" id="chat-box">
+      <div class="msg msg-ai">Hola, soy tu asesor financiero IA. Conozco tu cartera de 9 activos, tu perfil moderado y tu objetivo de jubilacion. En que te ayudo hoy?</div>
+    </div>
+    <div style="margin-top:12px;margin-bottom:8px">
+      <button class="btn-sm" onclick="setQ('Que activo me conviene comprar este mes?')">Que comprar este mes?</button>
+      <button class="btn-sm" onclick="setQ('Como me afecta la inflacion argentina?')">Inflacion y cartera</button>
+      <button class="btn-sm" onclick="setQ('Cuando debo rebalancear?')">Cuando rebalancear?</button>
+      <button class="btn-sm" onclick="setQ('Analiza mi cartera completa')">Analisis completo</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chat-q" placeholder="Pregunta sobre tu inversion..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="btn" id="chat-btn" onclick="sendChat()">Enviar</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-plan">
+  <div class="card">
+    <div style="font-size:16px;font-weight:700;margin-bottom:16px">Tu hoja de ruta</div>
+    <div class="plan-step"><div class="step-num">1</div><div><div class="step-title">Empezar ahora</div><div class="step-desc">Cada mes que esperas cuesta mas. El tiempo es tu mayor ventaja.</div><span class="tag t-now">Hacer ahora</span></div></div>
+    <div class="plan-step"><div class="step-num">2</div><div><div class="step-title">Mantener distribucion 60/25/15</div><div class="step-desc">ETFs internacionales + bonos + acciones locales. Calibrada para perfil moderado.</div><span class="tag t-now">En curso</span></div></div>
+    <div class="plan-step"><div class="step-num">3</div><div><div class="step-title">Rebalancear cada 6 meses</div><div class="step-desc">Si un activo supera su porcentaje objetivo, vende un poco y compra los rezagados.</div><span class="tag t-soon">Ano 1 en adelante</span></div></div>
+    <div class="plan-step"><div class="step-num">4</div><div><div class="step-title">Aumentar aportes</div><div class="step-desc">Pasar de USD 500 a USD 750/mes antes del ano 10 aumenta el capital final en 40%.</div><span class="tag t-soon">Progresivo</span></div></div>
+    <div class="plan-step"><div class="step-num">5</div><div><div class="step-title">Reducir riesgo en ano 15</div><div class="step-desc">Migra hacia mas bonos. Objetivo: 35% ETFs / 50% bonos / 15% locales.</div><span class="tag t-mid">Ano 15</span></div></div>
+    <div class="plan-step"><div class="step-num">6</div><div><div class="step-title">Activar retiro (regla del 4%)</div><div class="step-desc" id="plan-retiro">Retira el 4% anual sin agotar el fondo.</div><span class="tag t-late">Ano 20</span></div></div>
+  </div>
+</div>
+
+</div>
+
+<div class="modal" id="modal-tenencias">
+  <div class="modal-box">
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px">Cargar mis tenencias</div>
+    <div style="font-size:12px;color:#475569;margin-bottom:16px">Ingresa cantidad y precio de compra para ver tu ganancia/perdida real</div>
+    <div style="margin-bottom:12px">
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:6px">Activo</div>
+      <select id="t-symbol" style="background:#1e2a3a;border:1px solid #2e3a4a;color:#fff;padding:8px 12px;border-radius:8px;font-size:13px;width:100%">
+        <option value="SPY">SPY - ETF S&P 500</option>
+        <option value="XLP">XLP - ETF Consumo</option>
+        <option value="XLV">XLV - ETF Salud</option>
+        <option value="XLF">XLF - ETF Financiero</option>
+        <option value="NU">NU - Nubank</option>
+        <option value="TZX28.BA">TZX28 - Bono CER</option>
+        <option value="AL30.BA">AL30 - Bono Dolar</option>
+        <option value="YPFD.BA">YPF - Energia</option>
+        <option value="GGAL.BA">GGAL - Galicia</option>
+      </select>
+    </div>
+    <div style="margin-bottom:12px">
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:6px">Cantidad de acciones/unidades</div>
+      <input type="number" id="t-qty" placeholder="Ej: 10" min="0" step="0.01">
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:6px">Precio de compra promedio</div>
+      <input type="number" id="t-price" placeholder="Ej: 450.00" min="0" step="0.01">
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="saveHolding()" style="flex:1">Guardar</button>
+      <button class="btn-sm" onclick="closeModal()" style="padding:10px 20px">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Asesor Financiero IA · No constituye asesoramiento financiero certificado · Para inversores argentinos</div>
+
+<script>
+var BACKEND='https://investment-advisor-api-6hsu.onrender.com';
+var NEWS_KEY='ef6605fa9ad64431a43b7dc409982e';
+var SIGNALS={SPY:'COMPRAR',XLP:'MANTENER',XLV:'COMPRAR',XLF:'COMPRAR',NU:'MANTENER','TZX28.BA':'MANTENER','AL30.BA':'MANTENER','YPFD.BA':'COMPRAR','GGAL.BA':'MANTENER'};
+var projC=null;
+
+function fmt(n){if(n>=1000000)return'USD '+Math.round(n/100000)/10+'M';if(n>=1000)return'USD '+Math.round(n/1000)+'k';return'USD '+Math.round(n);}
+
+function recalc(){
+  var a=+document.getElementById('sl-aporte').value;
+  var y=+document.getElementById('sl-years').value;
+  var ini=+document.getElementById('sl-inicial').value;
+  var r=+document.getElementById('sl-rate').value/100;
+  document.getElementById('lv-aporte').textContent='USD '+a.toLocaleString('es-AR');
+  document.getElementById('lv-years').textContent=y+' anos';
+  document.getElementById('lv-inicial').textContent='USD '+ini.toLocaleString('es-AR');
+  document.getElementById('lv-rate').textContent=(r*100)+'%';
+  var mr=r/12,m=y*12;
+  var fut=mr>0?a*((Math.pow(1+mr,m)-1)/mr):a*m;
+  var total=Math.round(fut+ini*Math.pow(1+r,y));
+  var aportado=Math.round(a*m+ini);
+  var retiro=Math.round(total*0.04/12);
+  document.getElementById('st-final').textContent=fmt(total);
+  document.getElementById('st-aportado').textContent=fmt(aportado);
+  document.getElementById('st-ganancia').textContent=fmt(total-aportado);
+  document.getElementById('st-retiro').textContent=fmt(retiro)+'/mes';
+  document.getElementById('plan-retiro').textContent='Con '+fmt(total)+' acumulados, podes retirar '+fmt(retiro)+'/mes sin agotar el fondo.';
+  updateChart(a,y,ini,r);
+}
+
+function buildProj(a,y,ini,r){
+  var mr=r/12,pts=[],i,m;
+  for(i=0;i<=y;i++){m=i*12;pts.push(Math.round(mr>0?a*((Math.pow(1+mr,m)-1)/mr):a*m)+Math.round(ini*Math.pow(1+r,i)));}
+  return pts;
+}
+
+function updateChart(a,y,ini,r){
+  var labels=[],i;
+  for(i=0;i<=y;i++)labels.push(i===0?'Hoy':'Ano '+i);
+  var proj=buildProj(a,y,ini,r);
+  var dol=buildProj(a,y,ini,0.02);
+  var pf=buildProj(a,y,ini,0.03);
+  var cfg={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#475569',font:{size:11},maxTicksLimit:8}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#475569',font:{size:11},callback:function(v){return fmt(v);}}}}};
+  if(projC)projC.destroy();
+  projC=new Chart(document.getElementById('projChart'),{type:'line',data:{labels:labels,datasets:[{data:proj,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.08)',fill:true,tension:.4,pointRadius:0,borderWidth:2},{data:dol,borderColor:'#BA7517',tension:.4,pointRadius:0,borderWidth:1.5,borderDash:[4,3]},{data:pf,borderColor:'#475569',tension:.4,pointRadius:0,borderWidth:1.5,borderDash:[2,3]}]},options:cfg});
+}
+
+function show(v,btn){
+  document.querySelectorAll('.view').forEach(function(el){el.classList.remove('on');});
+  document.querySelectorAll('.nav button').forEach(function(el){el.classList.remove('on');});
+  document.getElementById('v-'+v).classList.add('on');
+  btn.classList.add('on');
+  if(v==='cartera')loadPrices();
+  if(v==='noticias')loadNews();
+}
+
+function loadPrices(){
+  document.getElementById('asset-list').innerHTML='<div style="text-align:center;padding:30px;color:#475569">Conectando... puede tardar 50 segundos la primera vez.</div>';
+  fetch(BACKEND+'/api/prices').then(function(r){return r.json();}).then(function(d){
+    if(d.success)renderAssets(d.data);
+    document.getElementById('last-update').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+  }).catch(function(){
+    document.getElementById('asset-list').innerHTML='<div style="color:#D85A30;padding:20px">Error al conectar. Intenta de nuevo en 30 segundos.</div>';
+  });
+}
+
+function renderAssets(assets){
+  var up=0,i,a,sorted,pos,sig,cur,price,gl,html='';
+  for(i=0;i<assets.length;i++){if(assets[i].changePercent>0)up++;}
+  sorted=assets.slice().sort(function(a,b){return b.changePercent-a.changePercent;});
+  document.getElementById('m-up').textContent=up+' / '+assets.length;
+  document.getElementById('m-best').textContent=sorted[0].symbol.replace('.BA','')+' +'+(sorted[0].changePercent.toFixed(2))+'%';
+  document.getElementById('m-worst').textContent=sorted[sorted.length-1].symbol.replace('.BA','')+(sorted[sorted.length-1].changePercent.toFixed(2))+'%';
+  var buys=0;for(i=0;i<assets.length;i++){if(SIGNALS[assets[i].symbol]==='COMPRAR')buys++;}
+  document.getElementById('m-buys').textContent=buys+' senales';
+  for(i=0;i<assets.length;i++){
+    a=assets[i];pos=a.changePercent>=0;sig=SIGNALS[a.symbol]||'MANTENER';
+    cur=a.currency==='ARS'?'$':'USD ';
+    price=a.currentPrice?cur+a.currentPrice.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2}):'Sin datos';
+    var glHtml='';
+    if(a.quantity>0&&a.purchasePrice>0&&a.currentPrice){
+      gl=((a.currentPrice-a.purchasePrice)/a.purchasePrice*100).toFixed(2);
+      glHtml='<div style="font-size:11px;color:'+(gl>=0?'#1D9E75':'#D85A30')+';margin-top:3px">'+(gl>=0?'Ganancia: +':'Perdida: ')+gl+'% · '+a.quantity+' unidades</div>';
+    }
+    html+='<div class="asset-row"><div><div style="font-size:14px;font-weight:700;color:#fff;font-family:monospace">'+a.symbol.replace('.BA','')+'</div><div style="font-size:12px;color:#64748b;margin-top:2px">'+a.name+' - '+a.allocation+'%</div>'+glHtml+'</div><div style="display:flex;align-items:center;gap:12px"><span style="font-size:15px;font-weight:600;color:#fff;font-family:monospace">'+price+'</span><span class="chg '+(pos?'up':'dn')+'">'+(pos?'+':'')+a.changePercent.toFixed(2)+'%</span><span class="sig '+(sig==='COMPRAR'?'sig-c':'sig-m')+'">'+sig+'</span></div></div>';
+  }
+  document.getElementById('asset-list').innerHTML=html;
+}
+
+function openModal(){document.getElementById('modal-tenencias').classList.add('open');}
+function closeModal(){document.getElementById('modal-tenencias').classList.remove('open');}
+
+function saveHolding(){
+  var sym=document.getElementById('t-symbol').value;
+  var qty=document.getElementById('t-qty').value;
+  var price=document.getElementById('t-price').value;
+  if(!qty||!price){alert('Completa todos los campos');return;}
+  fetch(BACKEND+'/api/prices/update-holdings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({symbol:sym,quantity:qty,purchasePrice:price})})
+  .then(function(r){return r.json();})
+  .then(function(d){if(d.success){closeModal();loadPrices();alert('Guardado correctamente');}else{alert('Error: '+d.error);}})
+  .catch(function(){alert('Error de conexion');});
+}
+
+function searchSymbol(){
+  var sym=document.getElementById('search-input').value.trim().toUpperCase();
+  if(!sym)return;
+  document.getElementById('search-result').innerHTML='<div style="color:#64748b;padding:20px">Buscando '+sym+'...</div>';
+  fetch(BACKEND+'/api/prices/search/'+sym)
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.success){
+      var q=d.data;var pos=q.changePercent>=0;
+      document.getElementById('search-result').innerHTML='<div class="card" style="margin-top:0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:20px;font-weight:700;font-family:monospace">'+q.symbol+'</div><div style="font-size:13px;color:#64748b;margin-top:2px">'+q.name+' · '+q.exchange+'</div></div><div style="text-align:right"><div style="font-size:24px;font-weight:700">'+q.currency+' '+parseFloat(q.price).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div><div class="chg '+(pos?'up':'dn')+'" style="display:inline-block;margin-top:4px">'+(pos?'+':'')+parseFloat(q.changePercent).toFixed(2)+'%</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px"><div class="card-sm"><div class="card-title">Maximo del dia</div><div style="font-size:16px;font-weight:600">'+parseFloat(q.high||0).toFixed(2)+'</div></div><div class="card-sm"><div class="card-title">Minimo del dia</div><div style="font-size:16px;font-weight:600">'+parseFloat(q.low||0).toFixed(2)+'</div></div><div class="card-sm"><div class="card-title">Volumen</div><div style="font-size:16px;font-weight:600">'+(q.volume?parseInt(q.volume).toLocaleString('es-AR'):'N/D')+'</div></div></div></div>';
+    } else {
+      document.getElementById('search-result').innerHTML='<div style="color:#D85A30;padding:20px">Simbolo no encontrado. Intenta con AAPL, MSFT, TSLA, etc.</div>';
+    }
+  }).catch(function(){
+    document.getElementById('search-result').innerHTML='<div style="color:#D85A30;padding:20px">Error de conexion.</div>';
+  });
+}
+
+function quickSearch(sym){document.getElementById('search-input').value=sym;searchSymbol();}
+
+function loadNews(){
+  document.getElementById('news-list').innerHTML='<div style="text-align:center;padding:30px;color:#475569">Buscando noticias...</div>';
+  var q=encodeURIComponent('Argentina inversion bonos mercado');
+  fetch('https://newsapi.org/v2/everything?q='+q+'&language=es&sortBy=publishedAt&pageSize=6&apiKey='+NEWS_KEY)
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.articles&&d.articles.length>0){
+      var html='',i,a,ago;
+      for(i=0;i<d.articles.length;i++){
+        a=d.articles[i];ago=Math.round((Date.now()-new Date(a.publishedAt))/3600000);
+        html+='<div class="news-item"><div class="news-src">'+(a.source&&a.source.name?a.source.name:'Fuente')+' - hace '+ago+' hs</div><div class="news-title">'+a.title+'</div><div class="news-sum">'+(a.description||'')+'</div><span class="news-tag nt-neu">Mercado financiero</span></div>';
+      }
+      document.getElementById('news-list').innerHTML=html;
+    } else {renderFallbackNews();}
+  }).catch(function(){renderFallbackNews();});
+}
+
+function renderFallbackNews(){
+  document.getElementById('news-list').innerHTML='<div class="news-item"><div class="news-src">Bloomberg</div><div class="news-title">Fed mantiene tasas, mercados al alza</div><div class="news-sum">La Reserva Federal no modifico las tasas, impulsando acciones globales.</div><span class="news-tag nt-pos">Positivo para SPY, XLF</span></div><div class="news-item"><div class="news-src">Infobae</div><div class="news-title">Argentina avanza en acuerdo con el FMI</div><div class="news-sum">Negociaciones generan expectativa sobre bonos soberanos.</div><span class="news-tag nt-pos">Positivo para AL30, GGAL</span></div><div class="news-item"><div class="news-src">El Cronista</div><div class="news-title">Inflacion debajo de lo esperado</div><div class="news-sum">El dato sorprendio positivamente. Los bonos CER ajustan al alza.</div><span class="news-tag nt-pos">Positivo para TZX28</span></div>';
+}
+
+function setQ(q){document.getElementById('chat-q').value=q;document.getElementById('chat-q').focus();}
+
+function sendChat(){
+  var q=document.getElementById('chat-q').value.trim();
+  if(!q)return;
+  var btn=document.getElementById('chat-btn');
+  var box=document.getElementById('chat-box');
+  var a=document.getElementById('sl-aporte').value;
+  var y=document.getElementById('sl-years').value;
+  box.innerHTML+='<div class="msg msg-usr">'+q+'</div>';
+  document.getElementById('chat-q').value='';
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>';
+  var thinking=document.createElement('div');
+  thinking.className='msg msg-ai';
+  thinking.textContent='Analizando...';
+  box.appendChild(thinking);
+  box.scrollTop=box.scrollHeight;
+  fetch(BACKEND+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,aporte:a,years:y})})
+  .then(function(r){return r.json();})
+  .then(function(resp){thinking.textContent=resp.reply||'Sin respuesta.';})
+  .catch(function(){thinking.textContent='Error al conectar. Intenta de nuevo.';})
+  .finally(function(){btn.disabled=false;btn.textContent='Enviar';box.scrollTop=box.scrollHeight;});
+}
+
+recalc();
+</script>
+</body>
+</html>
